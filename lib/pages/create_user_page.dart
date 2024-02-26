@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/user_service.dart'; // Assurez-vous d'avoir ce service implémenté
-import '../models/user.dart'; // Assurez-vous que votre modèle User est à jour
+import '../services/user_service.dart';
+import '../models/user.dart';
 
 class CreateUserPage extends StatefulWidget {
   @override
@@ -38,7 +38,15 @@ class _CreateUserPageState extends State<CreateUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create User'),
+        title: Text(
+          'Create a new User!',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.greenAccent,
       ),
       body: Form(
         key: _formKey,
@@ -49,7 +57,10 @@ class _CreateUserPageState extends State<CreateUserPage> {
             children: <Widget>[
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a name';
@@ -57,9 +68,13 @@ class _CreateUserPageState extends State<CreateUserPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 16.0),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an email';
@@ -67,9 +82,13 @@ class _CreateUserPageState extends State<CreateUserPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 16.0),
               DropdownButtonFormField<Civilite>(
                 value: _selectedCivilite,
-                decoration: InputDecoration(labelText: 'Civilité'),
+                decoration:  const InputDecoration(
+                  labelText: 'Civilité',
+                  border: OutlineInputBorder(),
+                ),
                 onChanged: (Civilite? newValue) {
                   setState(() {
                     _selectedCivilite = newValue!;
@@ -77,14 +96,31 @@ class _CreateUserPageState extends State<CreateUserPage> {
                 },
                 items: Civilite.values.map((Civilite classType) {
                   return DropdownMenuItem<Civilite>(
-                      value: classType, child: Text(civiliteToString(classType)));
+                    value: classType,
+                    child: Text(civiliteToString(classType)),
+                  );
                 }).toList(),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
+              SizedBox(height: 16.0),
+              Align(
+                alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   onPressed: _createUser,
-                  child: Text('Create User'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.cyan),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'Create User',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ],

@@ -32,7 +32,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome to the User Manager App!'),
+        title: Text('Welcome to the User Manager Screen!'),
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+        ),
+        backgroundColor: Colors.cyan,
       ),
       body: FutureBuilder<List<User>>(
         future: _userService.fetchUsers(),
